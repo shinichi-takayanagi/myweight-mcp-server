@@ -1,0 +1,31 @@
+# For more details on how to configure Wrangler, refer to:
+# https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name = "myweight-mcp-server"
+main = "src/index.ts"
+compatibility_date = "2025-03-10"
+
+# Migrations configuration
+[[migrations]]
+tag = "v1"
+new_classes = ["MyWeightMCP"]
+
+# Durable Objects configuration
+[durable_objects]
+bindings = [
+  { name = "MCP_OBJECT", class_name = "MyWeightMCP" }
+]
+
+# KV Namespaces configuration
+kv_namespaces = [
+  { binding = "OAUTH_KV", id = "${OAUTH_KV_ID}" }
+]
+
+# Observability configuration
+[observability]
+enabled = true
+
+# Assets configuration
+[assets]
+directory = "./static/"
+binding = "ASSETS" 
