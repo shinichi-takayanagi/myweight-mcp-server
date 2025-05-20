@@ -16,7 +16,7 @@ This server connects to the Health Planet API to access Takayanagi-san's weight 
 
 ```bash
 # Clone this repository
-git clone [repository URL]
+git clone https://github.com/shinichi-takayanagi/myweight-mcp-server.git
 
 # Install required packages
 npm install
