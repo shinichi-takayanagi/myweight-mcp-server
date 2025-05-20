@@ -52,18 +52,18 @@ Add this configuration to your MCP client:
 With the `fetchInnerScanData` tool, you can retrieve weight measurements for any time period:
 
 **Parameters:**
-- `from`: Starting date/time in YYYYMMDDHHmmss format (e.g., `20240101000000` for Jan 1, 2024)
-- `to`: Ending date/time in YYYYMMDDHHmmss format (e.g., `20240131235959` for Jan 31, 2024)
+- `from`: Starting date/time in YYYYMMDDHHmmss format (e.g., `20240530000000` for Mar 27, 2024)
+- `to`: Ending date/time in YYYYMMDDHHmmss format (e.g., `20240531235959` for May 31, 2024)
 
 **Example Response:**
 ```json
 [
   {
-    "date": "2024/01/01",
+    "date": "2024/05/30",
     "weight": 65.2
   },
   {
-    "date": "2024/01/02",
+    "date": "2024/05/31",
     "weight": 65.1
   }
 ]

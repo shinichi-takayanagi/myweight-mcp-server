@@ -40,9 +40,12 @@ export class MyWeightMCP extends McpAgent {
 			async ({ from, to }) => {
 				try {
 					// Health Planet APIから体重データを取得
+					console.log(from);
 					const data = await fetchInnerScanData(from, to);
+					//console.log(data);
 					// データをJSON形式の文字列に変換
 					const resultText = JSON.stringify(data, null, 2);
+					//console.log(resultText);
 					return {
 						// 結果をテキスト形式で返す
 						// 例: [{ "date": "2024/01/01", "weight": 65.2 }, ...]
