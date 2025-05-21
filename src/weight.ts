@@ -61,8 +61,11 @@ export const fetchInnerScanData = async (
   params.append('to', to);
 
   try {
+    console.log(url);
+    console.log(params);
     const response = await axios.post(url, params);
     // データを新しい順に並び替え、WeightData形式に変換
+    console.log(response.data.data);
     return response.data.data.reverse().map((record: { date: string; keydata: string }) => ({
       date: _parseDate(record.date),
       weight: Number(record.keydata),

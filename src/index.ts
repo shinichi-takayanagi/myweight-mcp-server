@@ -1,9 +1,10 @@
-import app from "./app";
 import { McpAgent } from "agents/mcp";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import OAuthProvider from "@cloudflare/workers-oauth-provider";
 import { fetchInnerScanData, type WeightData } from "./weight";
+
+
+// typesファイルは使用せずにインラインで型定義
 
 /**
  * Health Planet APIと連携して体重データを提供するMCPサーバー
@@ -39,9 +40,12 @@ export class MyWeightMCP extends McpAgent {
 			async ({ from, to }) => {
 				try {
 					// Health Planet APIから体重データを取得
+					console.log(from);
 					const data = await fetchInnerScanData(from, to);
+					//console.log(data);
 					// データをJSON形式の文字列に変換
 					const resultText = JSON.stringify(data, null, 2);
+					//console.log(resultText);
 					return {
 						// 結果をテキスト形式で返す
 						// 例: [{ "date": "2024/01/01", "weight": 65.2 }, ...]
@@ -60,14 +64,19 @@ export class MyWeightMCP extends McpAgent {
 	}
 }
 
-// OAuth2認証を使用してMCPサーバーをエクスポート
-export default new OAuthProvider({
-	apiRoute: "/sse",
-	// @ts-ignore
-	apiHandler: MyWeightMCP.mount("/sse"),
-	// @ts-ignore
-	defaultHandler: app,
-	authorizeEndpoint: "/authorize",
-	tokenEndpoint: "/token",
-	clientRegistrationEndpoint: "/register",
-});
+export default {
+	fetch(request: Request, env: Env, ctx: ExecutionContext) {
+		const url = new URL(request.url);
+
+		if (url.pathname === "/sse" || url.pathname === "/sse/message") {
+			// @ts-ignore
+			return MyWeightMCP.serveSSE("/sse").fetch(request, env, ctx);
+		}
+		if (url.pathname === "/mcp") {
+			// @ts-ignore
+			return MyWeightMCP.serve("/mcp").fetch(request, env, ctx);
+		}
+		return new Response("Not found", { status: 404 });
+	},
+};
+

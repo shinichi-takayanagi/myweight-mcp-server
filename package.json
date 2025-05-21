@@ -23,12 +23,10 @@
 		"wrangler": "^4.11.0"
 	},
 	"dependencies": {
-		"@cloudflare/workers-oauth-provider": "^0.0.2",
-		"@modelcontextprotocol/sdk": "^1.7.0",
-		"agents": "^0.0.43",
-		"axios": "^1.8.4",
-		"hono": "^4.7.4",
-		"moment": "^2.30.1",
-		"zod": "^3.24.2"
+		"@modelcontextprotocol/sdk": "1.11.4",
+		"agents": "^0.0.88",
+		"axios": "1.8.4",
+		"moment": "2.30.1",
+		"zod": "3.25.7"
 	}
 }

@@ -4,11 +4,12 @@
 name = "myweight-mcp-server"
 main = "src/index.ts"
 compatibility_date = "2025-03-10"
+compatibility_flags = ["nodejs_compat"]
 
 # Migrations configuration
 [[migrations]]
 tag = "v1"
-new_classes = ["MyWeightMCP"]
+new_sqlite_classes = ["MyWeightMCP"]
 
 # Durable Objects configuration
 [durable_objects]
